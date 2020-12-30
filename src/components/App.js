@@ -130,9 +130,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-             <Header text="Magical Movie Finder" changeType={this.changeType} />
+             <Header text="Magical Movie Finder" type={this.state.type} changeType={this.changeType} />
              <Search search={this.search} />
-             <p>{this.state.type}</p>
              <div className="movies">
                {this.state.loading && !this.state.errorMessage ? (
                <span>loading...</span>
