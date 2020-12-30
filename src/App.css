@@ -2,17 +2,27 @@
   text-align: center;
 }
 
-.App-header {
+.app-header {
   background-color: #282c34;
   height: 70px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 20px;
   cursor: pointer;
+}
+
+.header-button {
+  margin-left: 50px;
+  color: rgba(255, 255, 255, 0.63);
+  transition: all 300ms;
+}
+
+.header-button:hover {
+  color: #fff;
 }
 
 .spinner {
@@ -30,8 +40,9 @@
   flex-direction: row;
 }
 
-.App-header h2 {
+.app-header h2 {
   margin: 0;
+  margin-right: 80px;
 }
 
 .add-movies {
@@ -67,6 +78,7 @@
 
 input[type="submit"] {
   padding: 5px;
+  border-radius: 2px;
   background-color: transparent;
   color: black;
   border: 1px solid black;
