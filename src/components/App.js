@@ -5,67 +5,10 @@ import Movie from "./Movie";
 import Search from "./Search";
 
 
-const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b"; // you should replace this with yours
+const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b";
 
 
-// const App = () => {
-//   const [loading, setLoading] = useState(true);
-//   const [movies, setMovies] = useState([]);
-//   const [errorMessage, setErrorMessage] = useState(null);
-//   const [type, setType] = useState('all');
-
-//     useEffect(() => {
-    // fetch(MOVIE_API_URL)
-    //   .then(response => response.json())
-    //   .then(jsonResponse => {
-    //     setMovies(jsonResponse.Search);
-    //     setLoading(false);
-    //   });
-//   }, []);
-
-//   const changeType = (e, type) => {
-
-//     console.log(type)
-//   }
-
-    // const search = searchValue => {
-    // setLoading(true);
-    // setErrorMessage(null);
-
-    // fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=4a3b711b`)
-    //   .then(response => response.json())
-    //   .then(jsonResponse => {
-    //     if (jsonResponse.Response === "True") {
-    //       setMovies(jsonResponse.Search);
-    //       setLoading(false);
-    //     } else {
-    //       setErrorMessage(jsonResponse.Error);
-    //       setLoading(false);
-    //     }
-    //   });
-    // };
-
-//     return (
-//      <div className="App">
-//       <Header text="Magical Movie Finder" changeType={changeType} />
-//       <Search search={search} />
-//       <p>{type}</p>
-//       <div className="movies">
-//         {loading && !errorMessage ? (
-//          <span>loading...</span>
-//          ) : errorMessage ? (
-//           <div className="errorMessage">{errorMessage}</div>
-//         ) : (
-//           movies.map((movie, index) => (
-//             <Movie className="movie" key={`${index}-${movie.Title}`} movie={movie} />
-//           ))
-//           )}
-//       </div>
-//     </div>
-//   );
-// };
-
-class App extends React.Component {
+class App extends Component {
   constructor (props) {
     super(props);
       this.state = {
@@ -73,6 +16,7 @@ class App extends React.Component {
         type: 'all',
         errorMessage: '',
         movies: [],
+        searchText: '',
       }
   }
 
@@ -90,17 +34,24 @@ class App extends React.Component {
 
 
   changeType = (type) => {
+    console.log('Type: ' + type);
+
     this.setState({
-      type: type
+      type: type,
     })
+
+    setTimeout(() => {
+      this.search(this.state.searchText)
+    }, 500)
   }
 
   search = (searchValue) => {
     this.setState({
-      ...this.state,
+      searchText: searchValue,
       setLoading: true,
       errorMessage: null,
     })
+    console.log(this.state.searchText);
 
     var link = ''
 
@@ -108,6 +59,7 @@ class App extends React.Component {
       link = `https://www.omdbapi.com/?s=${searchValue}&apikey=4a3b711b`
     } else {
       link = `https://www.omdbapi.com/?type=${this.state.type}&s=${searchValue}&apikey=4a3b711b`
+      console.log(link);
     }
 
     fetch(link)
@@ -132,6 +84,7 @@ class App extends React.Component {
       <div className="App">
              <Header text="Magical Movie Finder" type={this.state.type} changeType={this.changeType} />
              <Search search={this.search} />
+             <p>{this.state.searchValue}</p>
              <div className="movies">
                {this.state.loading && !this.state.errorMessage ? (
                <span>loading...</span>
