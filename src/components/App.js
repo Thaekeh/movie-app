@@ -40,9 +40,7 @@ class App extends Component {
       type: type,
     })
 
-    setTimeout(() => {
       this.search(this.state.searchText)
-    }, 500)
   }
 
   search = (searchValue) => {
