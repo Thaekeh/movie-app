@@ -6,14 +6,15 @@ const PLACEHOLDER_IMAGE = 'https://elitescreens.com/images/product_album/no_imag
 
 const Movie = ({ movie }) => {
 
-    function sayHello() {
+    function openMovie() {
         window.open(`https://www.imdb.com/title/${movie.imdbID}`)
     }
 
   const poster =
     movie.Poster === "N/A" ? PLACEHOLDER_IMAGE : movie.Poster;
+    
   return (
-    <div className="movie" onClick={sayHello}>
+    <div className="movie" onClick={openMovie}>
       <h2>{movie.Title}</h2>
       <div>
         <img

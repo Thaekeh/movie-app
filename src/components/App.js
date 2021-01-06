@@ -16,7 +16,7 @@ class App extends Component {
         type: 'all',
         errorMessage: '',
         movies: [],
-        searchText: '',
+        searchText: 'Man',
       }
   }
 
@@ -29,18 +29,16 @@ class App extends Component {
         loading: false
       })
     });
-
   }
 
-
   changeType = (type) => {
-    console.log('Type: ' + type);
-
     this.setState({
       type: type,
     })
 
+    setTimeout(() => {
       this.search(this.state.searchText)
+    }, 200);
   }
 
   search = (searchValue) => {
@@ -49,7 +47,6 @@ class App extends Component {
       setLoading: true,
       errorMessage: null,
     })
-    console.log(this.state.searchText);
 
     var link = ''
 
@@ -82,7 +79,6 @@ class App extends Component {
       <div className="App">
              <Header text="Magical Movie Finder" type={this.state.type} changeType={this.changeType} />
              <Search search={this.search} />
-             <p>{this.state.searchValue}</p>
              <div className="movies">
                {this.state.loading && !this.state.errorMessage ? (
                <span>loading...</span>
@@ -98,6 +94,5 @@ class App extends Component {
     )
   }
 }
-
 
 export default App;
